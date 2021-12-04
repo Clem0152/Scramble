@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome to Scramble.</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <main id="app" class="container">
+    <h1>Welcome to Scramble.</h1>
+    <h3>The Disney Parks edition!</h3>
+    <div class="score">
+      <div class="points">
+        <p class="h2">{{points}}</p>
+        <p>POINTS</p>
+      </div>
+      <div class="strikes">
+        <p class="h2">{{strikes}}</p>
+        <p>STRIKES</p>
+      </div>
+    </div>
+    <div id="correct" class="inputResponse" v-bind:class="{ hidden: isCorrectHidden }">Correct!</div>
+    <div id="incorrect" class="inputResponse" v-bind:class="{ hidden: isIncorrectHidden }">Incorrect! Please try again!</div>
+    <div id="win" class="inputResponse" v-bind:class="{ hidden: didWin }">You Win! :) Play again?</div>
+    <div id="loose" class="inputResponse" v-bind:class="{ hidden: didLoose }">You loose! :( Play again?</div>
+    <p class="h2 word">
+      {{scrambled}}</p>
+    <form action="post" v-on:submit.prevent="verifyGuess">
+        <input type="text" v-model="guess" :disabled="disabled === true">
+    </form>
+    <div v-if="passes > 0">
+      <div id="pass" class="button" v-on:click="pass">{{passes}} Passes Remaining</div>
+    </div>
+    <div v-else>
+      <div id="pass" class="button no">Cannot pass</div>
+    </div>
+    <br>
+    <div id="playAgain" class="button" v-on:click="playAgain" v-bind:class="{ hidden: isPlayAgainHidden }">Play Again?</div>
+    <a class="reset" v-on:click="playAgain">Reset Game</a>
+
+  </main>
+
+  <script src="scramble.js"></script>
+</body>
+
+</html>
